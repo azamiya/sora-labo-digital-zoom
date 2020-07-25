@@ -1,5 +1,5 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
 
 const IndexPage = () => {
   return (
@@ -18,7 +18,7 @@ const IndexPage = () => {
         </li>
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
