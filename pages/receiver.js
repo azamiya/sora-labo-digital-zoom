@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import Link from 'next/link'
 import {SORA_LABO_WS_URL} from "../consts/endpoints";
 import Sora from '../assets/javascript/sora'
 
 const ReceiverPage = () => {
+  const videoRef = useRef(null);
 
   const [githubUserName, inputGithubUserName] = useState('')
   const [signalingKey, inputSignalingKey] = useState('')
-  const [channelName, inputChannelName] = useState('digitalZoomSample')
+  const [channelName, inputChannelName] = useState('sora-labo')
 
   const onConnectButtonClick = () => {
     const metadata = {
@@ -24,6 +25,15 @@ const ReceiverPage = () => {
       .catch(e => {
         console.error(e);
       });
+
+    recvonly.on('track', function(event) {
+      console.log(event)
+      const stream = event.streams[0];
+      if (!stream) return;
+      const remoteVideoId = 'remotevideo-' + stream.id;
+      console.log(remoteVideoId)
+      videoRef.current.srcObject = stream;
+    });
   }
 
   useEffect(() => {
@@ -63,6 +73,9 @@ const ReceiverPage = () => {
         <button
           className='connect'
           onClick={onConnectButtonClick}>CONNECT</button>
+      </div>
+      <div>
+        <video ref={videoRef} autoPlay controls playsInline />
       </div>
       <style jsx>{`
         p {
