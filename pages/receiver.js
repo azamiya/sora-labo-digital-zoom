@@ -10,6 +10,17 @@ const ReceiverPage = () => {
   const [signalingKey, inputSignalingKey] = useState("");
   const [channelName, inputChannelName] = useState("sora-labo");
 
+  useEffect(() => {
+    const _githubUserName = localStorage.getItem("_githubUserName");
+    if (_githubUserName) {
+      inputGithubUserName(_githubUserName);
+    }
+    const _signalingKey = localStorage.getItem("_signalingKey");
+    if (_signalingKey) {
+      inputSignalingKey(_signalingKey);
+    }
+  }, []);
+
   const onConnectButtonClick = () => {
     const metadata = {
       signaling_key: signalingKey,
@@ -30,17 +41,6 @@ const ReceiverPage = () => {
       videoRef.current.srcObject = stream;
     });
   };
-
-  useEffect(() => {
-    const _githubUserName = localStorage.getItem("_githubUserName");
-    if (_githubUserName) {
-      inputGithubUserName(_githubUserName);
-    }
-    const _signalingKey = localStorage.getItem("_signalingKey");
-    if (_signalingKey) {
-      inputSignalingKey(_signalingKey);
-    }
-  }, []);
 
   return (
     <div>
@@ -87,6 +87,9 @@ const ReceiverPage = () => {
         }
         button.connect {
           margin: 1rem 0;
+        }
+        video {
+          width: 320px;
         }
       `}</style>
     </div>
