@@ -30,7 +30,10 @@ const ReceiverPage = () => {
 
     const soraConnection = Sora.connection(SORA_LABO_WS_URL);
     const channelId = `${githubUserName}@${channelName}`;
-    const recvonly = soraConnection.recvonly(channelId, metadata);
+    const options = {
+      videoCodecType: "VP8",
+    };
+    const recvonly = soraConnection.recvonly(channelId, metadata, options);
     recvonly.connect().catch((e) => {
       console.error(e);
     });

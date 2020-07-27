@@ -30,7 +30,10 @@ const SenderPage = () => {
 
     const soraConnection = Sora.connection(SORA_LABO_WS_URL);
     const channelId = `${githubUserName}@${channelName}`;
-    const sendonly = soraConnection.sendonly(channelId, metadata);
+    const options = {
+      videoCodecType: "VP8",
+    };
+    const sendonly = soraConnection.sendonly(channelId, metadata, options);
     navigator.mediaDevices
       .getUserMedia({ audio: true, video: true })
       .then((mediaStream) => {
