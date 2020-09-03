@@ -16,6 +16,11 @@ const IndexPage = () => {
             <a>Receiver</a>
           </Link>
         </li>
+        <li>
+          <Link href="/digital-zoom">
+            <a>Digital zoom</a>
+          </Link>
+        </li>
       </ul>
     </div>
   );
